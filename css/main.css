@@ -1,0 +1,244 @@
+@charset "utf-8";
+
+
+/* ctrl + g 번호입력: 해당줄찾기 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    color: #333;
+    line-height: 1;
+}
+
+/* 모바일 reset */
+.mobile {
+    display: none;
+}
+
+/* header */
+header {
+    height: 100px;
+}
+
+header .inner {
+    max-width: calc(100% - 10%);
+    /* ★화면크기에 따라 양끝 5% 여백생길수있도록 
+    퍼센트로 안해주면 화면 줄이면 줄바꿈 될수있기에★*/
+    margin: 0 auto;
+    /* 가운데로 잡아주기 */
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* 양끝에 붙여서 정렬 */
+    align-items: center;
+    /* 수직정렬 */
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+header .pc_gnb {
+    height: 100%;
+}
+
+header .pc_gnb>ul {
+    display: flex;
+    height: 100%;
+    font-size: 20px;
+}
+
+header .pc_gnb>ul>li {
+    text-align: center;
+    padding: 0 30px;
+    position: relative;
+}
+
+
+header .pc_gnb>ul>li>a {
+    /* line-height: 100px; */
+    display: flex;
+    align-items: center;
+    /* 수직가운데 정렬 > 높이값을 가지고있어야 정렬이됨 */
+    justify-content: center;
+    height: 100%;
+    /* 부모가 가지고있는 영역에서 수직가운데 정렬을 해주세요
+    이렇게해야 반응형일때 안깨짐
+    반응형할때 플렉스사용하는게 젤편함 나중에 수정할 코드가 적어짐!!! */
+    /* ★공식이라고 보면됨 외우기★ */
+    font-weight: bold;
+    color: #7a6955;
+}
+
+/* ↑ 여기까지가 1차메뉴영역 */
+
+/* ↓이제부터 2차메뉴영역 */
+header .pc_gnb>ul>li>ul {
+    background-color: #7a6955;
+    color: #fff;
+    padding: 20px;
+    font-size: 16px;
+
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* ★★ left:0 일때는 상관이없으나,
+    left값이 50%로 잡히는순간 width가 줄어들수있어서 width:100% 잡아주는것이좋음 ★★ */
+}
+
+
+header .pc_gnb>ul>li>ul>li {
+    padding: 10px 0;
+}
+
+header .pc_gnb>ul>li>ul>li>a {}
+
+
+/* ↓오른쪽메뉴(utill) */
+header .user_gnb {
+    display: flex;
+    align-items: center;
+    /* 자식들 높이가 다르니깐 가운데 수직정렬해주기!!! */
+    font-size: 14px;
+}
+
+header .user_gnb li {
+    margin-left: 15px;
+
+}
+
+header .user_gnb li:last-child {
+    border: 1px solid #7a6955;
+    color: #7a6955;
+    padding: 10px 20px;
+}
+
+/* ★★★헤더 호버시 안흔들릴려면 포지션:엡솔루트로 2차메뉴 잡아줘야함★★★  */
+
+.main_visual {
+    height: 50vh;
+    background-color: #eee;
+}
+
+
+
+
+
+
+/* ★★★★★★★ 미디어쿼리 START!★★★★★★★ */
+
+/* ↓ 화면줄일때 헤더 글자크기로 인한 줄바꿈 변동이 없기위해  */
+/* 해상도 1440px 이하 */
+@media screen and (max-width:1440px) {
+    header .inner {
+        max-width: 98%;
+    }
+
+    header h1 {
+        font-size: 1.8vw;
+    }
+
+    header .pc_gnb>ul {
+        /* 검색창F12 에있는 클래스명 그대로 들고오는것이 좋음 */
+        /* ★ 브라우저화면의 넓이에 따라 비율에 맞춰서 글자크기 커지고 작아지도록
+        화면크기에 따라 글자크기 조절됨 */
+        /* ★ 1vw = 1% = 10px 과 거의유사하게 반응 */
+        font-size: 1.4vw;
+    }
+
+    header .pc_gnb>ul>li {
+        /* 브라우저가 줄어들때 메뉴글자가 줄바꿈되지않도록 여백도 줄여서 조정 */
+        padding: 0 15px;
+    }
+}
+
+
+
+
+
+
+
+/* ★1024px 이하일때는 가장많이 사용함 일반적★ */
+/* 해상도 1024px 이하 */
+@media screen and (max-width:1024px) {
+    .pc {
+        display: none !important;
+        /* 가장우선순위로 잡아줄거다. 
+        !important 안쓰면,  user_gnb에 플렉스잡혀있어서 안없어짐
+        플렉스가 우선순위 높기때문에*/
+
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    header .mobile_gnb {
+        background-color: #eee;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        /* 픽시드는 브라우저가 중심이됨 */
+        top: 0;
+        /* left: 0; */
+        left: 100%;
+        /* 우선 밖으로 내보내기 */
+        /* ★거의 공식이라고 보면됨★ */
+        padding: 50px;
+        transition: 0.7s;
+    }
+
+    header .mobile_gnb.on {
+        left: 0;
+        transition: 0.7s;
+    }
+
+    .mobile_gnb .user_gnb {
+        justify-content: flex-end;
+        /* 오른쪽 끝으로 보내는것 : flex-end */
+    }
+
+    /* 모바일 1차메뉴 */
+    .mobile_gnb .gnb {}
+
+    .mobile_gnb .gnb>li {}
+
+    .mobile_gnb .gnb>li>a {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px 0;
+        display: block;
+        /* a는 패딩이 나타나려면 디스플레이:블락해줘야함 */
+    }
+
+    /* 모바일 2차메뉴 */
+    .mobile_gnb .gnb>li>ul {
+        display: none;
+    }
+
+    .mobile_gnb .gnb>li>ul>li {}
+
+    .mobile_gnb .gnb>li>ul>li>a {
+        padding: 12px 0;
+        display: block;
+    }
+
+
+}
+
+/* 1024px 이하 */

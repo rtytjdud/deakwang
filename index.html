@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대광로제비앙</title>
+    <link href="css/main.css" rel="stylesheet" />
+
+    <script src="lib/jquery-3.6.1.min.js"></script>
+    <script>
+        $(function () {
+            //싱글드롭다운 : 11_메뉴드롭다운.html 참고
+            $('.pc_gnb .depth01').mouseenter(function () {
+                $(this).children('.depth02').stop().slideDown();
+            });
+            $('.pc_gnb .depth01').mouseleave(function () {
+                $(this).children('.depth02').stop().slideUp();
+                //$('.pc_gnb .depth02').stop().slideUp();
+            });
+
+            //클레스명제어 아코디언참고해서 모바일메뉴
+            //메뉴보기 클릭 시 .mobile_gnb한테 
+            //클레스명 추가 addClass()
+
+            //메뉴닫기 클릭 시 .mobile_gnb한테 
+            //클레스명 삭제 removeClass()
+
+            /* css파일에서 .mobile_gnb한테
+            클래스명 붙으면 left : 0;
+            부드럽게 움직이도록 설정 transition */
+
+            $('.open').click(function () {
+                $('.mobile_gnb').addClass('on');
+                //mobile_gnb한테 클레스를 추가해주겠다. : on >> css에도 기재해줘야함
+                //↓ 이후 내가 원하는 동작 잡아주기(css로)
+            });
+            $('.close').click(function () {
+                $('.mobile_gnb').removeClass('on');
+                //메뉴닫기에서도 부드럽게 트렌지션원할경우 - on이 없는 기존 .mobile_gnb에
+                //트렌지션이 걸려있어야함
+            });
+
+
+            //모바일메뉴(아코디언메뉴) 참고파일 12번
+            //1차메뉴를 클릭했을 때 2차메뉴 슬라이드다운
+            //다른 1차메뉴 클릭 시 열려있는 2차메뉴는 슬라이드업
+            //
+            $('.mobile_gnb .depth01 >a').click(function () {
+                if ($(this).next().css('display') == 'none') {
+                    //$(this) 해석 : 내가 클릭한 a 태그(선택자) 바로밑(뒤)에있는 형제선택자 클래스의 
+                    //css가  display:none이라면 
+                    $('.mobile_gnb .depth02').slideUp(); //ⓑ짝궁
+                    //내가 두번째 클릭한 선택자가 슬라이드 다운될때,
+                    //첫번째 클릭한 선택자(기존에 열려있는 2차메뉴)는 올라가야되므로
+                    //내가 클릭한 선택자외에는 다 닫아버리기
+
+                    $(this).next().slideDown(); //ⓐ짝궁
+                    //내가클릭한 선택자 바로 뒤에있는 형제선택자를 슬라이드 다운해주세요
+
+                    /* 클릭한 a태그한테 글자색 변경 */
+                    $('.mobile_gnb .depth01>a').css('color', '#333'); //ⓑ짝궁
+                    //내가클릭하지않은 모든 .depth01>a 에겐 #333
+
+                    $(this).css('color', '#7a6955'); //ⓐ짝궁
+                    //★내가클릭한 선택자한테 스타일넣어주겠다. ('속성', '속성값')
+                    //제이쿼리에서 스타일은 css에서 표기
+
+
+                } else { //그렇지않다면 해석 : display:none 상태가 아니라면!
+                    $(this).next().slideUp();
+                    //내가 클릭한 선택자 바로 뒤에있는 형제선택자가 
+                    //display:none이 아니라면 슬라이드업해주세요
+
+                    $(this).css({ 'color': '#333' });
+                    //그렇지않다면 내가 클릭한 선택자의 css
+                    //★여러개의 스타일을 추가할때, 사이에 중괄호(:)를 추가시켜줘야함
+                }
+
+
+            });
+
+
+
+
+
+        });//jquery end
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <h1>
+                <a href="#">대광로제비앙</a>
+            </h1>
+            <nav class="pc pc_gnb">
+                <!-- 클레스명 두개 -->
+                <ul>
+                    <li class="depth01">
+                        <a href="#">회사소개</a>
+                        <ul class="depth02">
+                            <li><a href="#">CEO인사말</a></li>
+                            <li><a href="#">회사연혁</a></li>
+                            <li><a href="#">VISION</a></li>
+                            <li><a href="#">오시는길</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">사업영역</a>
+                        <ul class="depth02">
+                            <li><a href="#">주택사업</a></li>
+                            <li><a href="#">건축 토목사업</a></li>
+                            <li><a href="#">조경 기타사업</a></li>
+                            <li><a href="#">호텔사업</a></li>
+                            <li><a href="#">금융사업</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">분양단지</a>
+                        <ul class="depth02">
+                            <li><a href="#">분양단지</a></li>
+                            <li><a href="#">분양예정단지</a></li>
+                            <li><a href="#">주택청약안내</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">공사 입주단지</a>
+                        <ul class="depth02">
+                            <li><a href="#">공사단지</a></li>
+                            <li><a href="#">입주단지</a></li>
+                            <li><a href="#">입주가이드</a></li>
+                            <li><a href="#">입주예약</a></li>
+                            <li><a href="#">입주예약조회</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">BRAND</a>
+                        <ul class="depth02">
+                            <li><a href="#">새소식</a></li>
+                            <li><a href="#">CI/BI</a></li>
+                            <li><a href="#">수상실적</a></li>
+                            <li><a href="#">광고센터</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">고객센터</a>
+                        <ul class="depth02">
+                            <li><a href="#">고객센터안내</a></li>
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">자주하는질문</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                </ul>
+            </nav><!-- .pc_gnb end -->
+
+            <ul class="user_gnb pc">
+                <!-- 클래스명 두개존재 -->
+                <li><a href="#">검색</a></li>
+                <li><a href="#">회원가입</a></li>
+                <li><a href="#">로그인</a></li>
+            </ul><!-- .user_gnb end -->
+
+
+            <!-- ★★★★★★★모바일메뉴 영역★★★★★★★ -->
+            <i class="mobile open"><span>메뉴보기</span></i>
+            <nav class="mobile mobile_gnb">
+                <!-- 클레스명 두개 -->
+
+                <ul class="user_gnb">
+                    <!-- 클래스명 두개존재 -->
+                    <li><a href="#">검색</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li class="close"><a href="#">메뉴닫기</a></li>
+                    <li><a href="#">로그인</a></li>
+                </ul><!-- .user_gnb end -->
+
+                <ul class="gnb">
+                    <li class="depth01">
+                        <a href="#">회사소개</a>
+                        <ul class="depth02">
+                            <li><a href="#">CEO인사말</a></li>
+                            <li><a href="#">회사연혁</a></li>
+                            <li><a href="#">VISION</a></li>
+                            <li><a href="#">오시는길</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">사업영역</a>
+                        <ul class="depth02">
+                            <li><a href="#">주택사업</a></li>
+                            <li><a href="#">건축 토목사업</a></li>
+                            <li><a href="#">조경 기타사업</a></li>
+                            <li><a href="#">호텔사업</a></li>
+                            <li><a href="#">금융사업</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">분양단지</a>
+                        <ul class="depth02">
+                            <li><a href="#">분양단지</a></li>
+                            <li><a href="#">분양예정단지</a></li>
+                            <li><a href="#">주택청약안내</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">공사 입주단지</a>
+                        <ul class="depth02">
+                            <li><a href="#">공사단지</a></li>
+                            <li><a href="#">입주단지</a></li>
+                            <li><a href="#">입주가이드</a></li>
+                            <li><a href="#">입주예약</a></li>
+                            <li><a href="#">입주예약조회</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">BRAND</a>
+                        <ul class="depth02">
+                            <li><a href="#">새소식</a></li>
+                            <li><a href="#">CI/BI</a></li>
+                            <li><a href="#">수상실적</a></li>
+                            <li><a href="#">광고센터</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                    <li class="depth01">
+                        <a href="#">고객센터</a>
+                        <ul class="depth02">
+                            <li><a href="#">고객센터안내</a></li>
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">자주하는질문</a></li>
+                        </ul><!-- .depth02 end -->
+                    </li><!-- .depth01 end -->
+                </ul>
+            </nav><!-- .mobile_gnb end -->
+        </div><!-- .inner end -->
+    </header>
+
+    <section class="main_visual">
+        메인비주얼 제작하기
+    </section><!-- .main_visual end -->
+
+</body>
+
+</html>
