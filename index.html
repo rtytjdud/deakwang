@@ -81,6 +81,36 @@
 
             });
 
+            //about 탭메뉴
+            //.tab_menu li를 클릭했을 때 이벤트가 실행
+            //.tab_menu li한테 클래스명 on추가/삭제
+            $(function () {
+                $('.tab_menu li').click(function () {
+
+                    $('.tab_menu li').removeClass('on')
+                    $(this).addClass('on');
+
+                    //.tab_cont한테 클래스명 on 추가/삭제
+                    $('.tab_cont').removeClass('on')
+                    $('.tab_cont').eq($(this).index()).addClass('on');
+                    //내가클릭한 선택자의 순서값을 찾아서 순서적용! 
+                    //그 순서에 따라 클래스를 잡아주겠다.
+
+                    //.bg>div 한테 hide(), show();
+                    $('.bg>div').hide();
+                    $('.bg>div').eq($(this).index()).show();
+
+                });
+
+
+
+
+            });
+
+
+
+
+
 
 
 
@@ -238,9 +268,57 @@
     </header>
 
     <section class="main_visual">
-        메인비주얼 제작하기
+        <img class="pc" src="img/main.jpg" alt="" />
+        <img class="mobile" src="img/main-mo.jpg" alt="" />
+
     </section><!-- .main_visual end -->
 
+    <section class="quick_menu">
+        <ul class="inner">
+            <li><a href="#">QUICK MENU</a></li>
+            <li><a href="#">입주예약</a></li>
+            <li><a href="#">입주가이드</a></li>
+            <li><a href="#">고객센터</a></li>
+        </ul><!-- .inner end -->
+    </section><!-- .quick_menu end -->
+
+    <section class="about">
+        <div class="inner">
+            <h3>ABOUT US</h3>
+            <ul class="tab_menu">
+                <li class="on">대광건영</li>
+                <!-- ★on을 해놔야 제이쿼리 클래스명on 추가(addClass)/삭제(removeClass)가능 -->
+                <li>대광로제비앙</li>
+            </ul><!-- .tab_menu end -->
+
+            <div class="tabs">
+
+                <div class="tab_cont on">
+                    <p>대광은 고객 중심 주택문화를<br />
+                        실현하기 위해 노력합니다.
+                    </p>
+                    <a href="#">기업 소개 바로가기</a>
+                </div><!-- .tab_cont end -->
+
+                <div class="tab_cont">
+                    <p>고품격 주거 문화를 리드하는<br />
+                        대광로제비앙 입니다.
+                    </p>
+                    <a href="#">브랜드 소개 바로가기</a>
+                </div><!-- .tab_cont end -->
+
+            </div><!-- .tabs end -->
+
+        </div><!-- .inner -->
+
+        <div class="bg">
+            <div class="bg1"><span>대광건영 이미지</span></div>
+            <div class="bg2"><span>대광로제비앙 이미지</span></div>
+            <!-- ★span 넣는이유는 접근성고려를 위해! 대체텍스트! 프로그램상으로 이미지 인식하도록 이내용 읽을 수있도록 
+            빈태그는 있으면 안됨 오류뜸-->
+        </div><!-- .bg end -->
+
+    </section><!-- .about end -->
 </body>
 
 </html>

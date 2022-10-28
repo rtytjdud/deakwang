@@ -22,6 +22,15 @@ body {
     line-height: 1;
 }
 
+.inner {
+    max-width: 1440px;
+    /* 자신의 값보다 커지는것을 방지 */
+    /* 화면크기 1440보다 작아질것을 생각해서 위드잡아주기 */
+    width: calc(100% - 24px);
+    margin: 0 auto;
+
+}
+
 /* 모바일 reset */
 .mobile {
     display: none;
@@ -131,8 +140,144 @@ header .user_gnb li:last-child {
 /* ★★★헤더 호버시 안흔들릴려면 포지션:엡솔루트로 2차메뉴 잡아줘야함★★★  */
 
 .main_visual {
-    height: 50vh;
+    height: calc(100vh - 100px);
     background-color: #eee;
+}
+
+
+.main_visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* .quick_menu */
+.quick_menu {
+    height: 130px;
+}
+
+.quick_menu ul {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* li들 양끝에 붙여 정렬시켜주기 */
+}
+
+.quick_menu ul li {
+    height: 100%;
+    width: calc(100% / 4);
+    border-right: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.quick_menu ul li:first-child {
+    border-left: 1px solid #ccc;
+    color: #7a6955;
+    font-weight: bold;
+}
+
+/* .about */
+.about {
+    height: 960px;
+    background: url('../img/dk-bg.jpg') center center / cover no-repeat;
+    color: #fff;
+    padding: 200px 0;
+    position: relative;
+    /* 중심설정해놓고 bg클래스 위지잡아주기위함 */
+}
+
+.about .bg>div span {
+    position: absolute;
+    left: -9999999px;
+    /* 텍스트 저멀리 날려버리기 눈에안보이도록 */
+
+}
+
+.about .bg>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.about .bg>div.bg1 {
+    background: url('../img/dk-bg.jpg') center center / cover no-repeat;
+}
+
+.about .bg>div.bg2 {
+    background: url('../img/loge-bg.jpg') center center / cover no-repeat;
+}
+
+.about .inner {
+    z-index: 9;
+    position: relative;
+    /* position: relative; z인덱스에 무조건 따라와야함 */
+    /* .bg를 위에 엎었기때문에 inner안에 텍스트들이 아래에 깔려있으므로 */
+}
+
+.about h3 {
+    font-size: 50px;
+    /* h3은 블락요소이므로 옆에 클래스오려면
+    본인이 가지고있는 영역만 잡힐수있도록 인라인블록 */
+    display: inline-block;
+    vertical-align: middle;
+    /* 수직정렬 */
+}
+
+.about .tab_menu {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    margin-left: 100px;
+
+}
+
+.about .tab_menu li {
+    display: inline-block;
+    margin-right: 50px;
+    color: rgba(255, 255, 255, 0.518);
+}
+
+.about .tab_menu li.on {
+    color: #fff;
+    /* 클릭할때 흰색으로 체인지! 제이쿼리로 잡아주기 */
+    cursor: pointer;
+}
+
+.about .tab_cont {
+    margin-top: 150px;
+    display: none;
+
+}
+
+.about .tab_cont.on {
+    display: block;
+
+}
+
+.about .tab_cont p {
+    font-size: 50px;
+    line-height: 1.4;
+}
+
+.about .tab_cont a {
+    width: 220px;
+    height: 60px;
+    border: 1px solid #fff;
+    text-align: center;
+    line-height: 60px;
+    display: block;
+    margin-top: 50px;
+}
+
+.about .tab_cont a:hover {
+    background-color: #7a6955;
+    border: 1px solid #7a6955;
 }
 
 
@@ -164,6 +309,12 @@ header .user_gnb li:last-child {
     header .pc_gnb>ul>li {
         /* 브라우저가 줄어들때 메뉴글자가 줄바꿈되지않도록 여백도 줄여서 조정 */
         padding: 0 15px;
+    }
+
+    header .pc_gnb>ul>li>ul {
+        font-size: 1vw;
+        padding: 10px;
+        /* 내가한거 */
     }
 }
 
@@ -200,7 +351,16 @@ header .user_gnb li:last-child {
         /* 우선 밖으로 내보내기 */
         /* ★거의 공식이라고 보면됨★ */
         padding: 50px;
-        transition: 0.7s;
+
+        /* 이부분이해안됫음 다시 체크하기↓  */
+        overflow-y: scroll;
+        /* ★해당하는영역 벗어나면 스크롤바 생성되도록 만들어줌 */
+
+    }
+
+    /* 이부분이해안됫음 다시 체크하기↓  */
+    header .mobile_gnb::-webkit-scrollbar {
+        display: none;
     }
 
     header .mobile_gnb.on {
@@ -238,7 +398,70 @@ header .user_gnb li:last-child {
         display: block;
     }
 
+    /* .quick */
+    .quick_menu {
+        height: 60px;
+    }
+
+    .quick_menu ul li:first-child {
+        display: none;
+    }
+
+    .quick_menu ul li {
+        width: calc(100% / 3);
+        font-size: 16px;
+    }
+
+    .quick_menu ul li:nth-child(2) {
+        border-left: 1px solid #ccc;
+    }
+
+    /* .about */
+    .about {
+        height: 500px;
+        padding: 80px 0;
+    }
+
+    .about h3 {
+        font-size: 30px;
+        display: block;
+        /* 이제 더이상 가로정렬할필요 없으므로  display: block으로 
+        밑으로 떨어트려주기  */
+    }
+
+    .about .tab_menu {
+        font-size: 16px;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+
+    .about .tab_cont {
+        margin-top: 80px;
+    }
+
+    .about .tab_cont p {
+        font-size: 30px;
+    }
+
+    .about .tab_cont a {
+        width: 200px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 14px;
+    }
 
 }
 
 /* 1024px 이하 */
+
+@media screen and (max-width:460px) {
+
+    /* 460px이하일때 */
+    /* ★이거 실무에 너무 필요하고 중요하고 유용할듯!★ */
+    .about .tab_cont p br {
+        display: none;
+        /* 최소 320px까지는 신경써줘야함 */
+    }
+
+}
